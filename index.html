@@ -1,269 +1,520 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
+  <title>Mujahid Online Store</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mujahid Web Studio</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:#f4f4f4;
+      color:#222;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
-      color: #222;
-      line-height: 1.6;
+    header{
+      background:#111;
+      color:white;
+      text-align:center;
+      padding:25px 10px;
     }
 
-    header {
-      background: #111827;
-      color: white;
-      padding: 18px;
-      text-align: center;
+    header h1{margin:0 0 8px}
+
+    .search{
+      padding:15px;
+      text-align:center;
     }
 
-    header h1 {
-      font-size: 28px;
+    .search input{
+      width:95%;
+      max-width:500px;
+      padding:13px;
+      border:1px solid #ccc;
+      border-radius:10px;
+      font-size:16px;
     }
 
-    header p {
-      color: #cbd5e1;
+    .products{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      padding:15px;
     }
 
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-      background: white;
+    .product{
+      background:white;
+      padding:12px;
+      border-radius:12px;
+      text-align:center;
+      box-shadow:0 2px 8px #ccc;
     }
 
-    .hero h2 {
-      font-size: 36px;
-      margin-bottom: 15px;
+    .photo{
+      height:130px;
+      background:#eee;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:60px;
     }
 
-    .hero p {
-      max-width: 600px;
-      margin: auto;
-      color: #555;
+    .product h3{
+      margin:10px 0 5px;
     }
 
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 13px 25px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
+    .price{
+      font-weight:bold;
+      font-size:18px;
     }
 
-    section {
-      padding: 45px 20px;
-      max-width: 1000px;
-      margin: auto;
+    button{
+      border:0;
+      background:#111;
+      color:white;
+      padding:11px 15px;
+      border-radius:8px;
+      cursor:pointer;
+      margin:4px;
     }
 
-    section h2 {
-      text-align: center;
-      margin-bottom: 25px;
+    .cart{
+      background:white;
+      margin:15px;
+      padding:18px;
+      border-radius:12px;
     }
 
-    .services,
-    .menu {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+    .cart-item{
+      border-bottom:1px solid #ddd;
+      padding:8px 0;
     }
 
-    .card,
-    .item {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    .green{
+      background:green;
+      width:100%;
+      font-size:17px;
     }
 
-    .card h3,
-    .item h3 {
-      margin-bottom: 10px;
+    input,textarea,select{
+      width:100%;
+      padding:12px;
+      margin:6px 0;
+      border:1px solid #ccc;
+      border-radius:8px;
+      font-size:15px;
     }
 
-    .price {
-      font-size: 22px;
-      font-weight: bold;
-      margin-top: 10px;
+    textarea{
+      height:90px;
     }
 
-    .restaurant {
-      background: #fff;
-      border-radius: 15px;
-      padding: 30px 20px;
+    .final-total{
+      font-size:20px;
+      color:green;
     }
 
-    .restaurant-title {
-      text-align: center;
-      background: #111;
-      color: white;
-      padding: 25px;
-      border-radius: 12px;
-      margin-bottom: 25px;
+    footer{
+      background:#111;
+      color:white;
+      text-align:center;
+      padding:20px;
+      margin-top:20px;
     }
 
-    .restaurant-title h3 {
-      font-size: 28px;
-    }
-
-    .contact {
-      text-align: center;
-      background: white;
-      border-radius: 12px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111827;
-      color: white;
-      margin-top: 30px;
+    @media(max-width:400px){
+      .products{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Mujahid Web Studio -->
+<header>
+  <h1>Mujahid Online Store</h1>
+  <p>Fashion for Everyone</p>
+</header>
 
-  <header>
-    <h1>Mujahid Web Studio</h1>
-    <p>Simple Websites for Businesses</p>
-  </header>
+<div class="search">
+  <input
+    id="search"
+    type="text"
+    placeholder="Search clothes..."
+    onkeyup="searchProducts()">
+</div>
 
-  <div class="hero">
-    <h2>We Build Modern Websites</h2>
 
-    <p>
-      I create simple, clean and mobile-friendly websites
-      for small businesses and personal brands.
-    </p>
+<div class="products">
 
-    <a class="btn" href="#contact">Contact Me</a>
+  <div class="product">
+    <div class="photo">👕</div>
+    <h3>Premium T-Shirt</h3>
+    <p class="price">Rs. 1499</p>
+
+    <select id="size1">
+      <option>Size: M</option>
+      <option>Size: L</option>
+      <option>Size: XL</option>
+    </select>
+
+    <button onclick="addToCart('Premium T-Shirt',1499,'size1')">
+      Add to Cart
+    </button>
   </div>
 
-  <!-- Services -->
 
-  <section>
-    <h2>My Services</h2>
+  <div class="product">
+    <div class="photo">👔</div>
+    <h3>Casual Shirt</h3>
+    <p class="price">Rs. 1999</p>
 
-    <div class="services">
+    <select id="size2">
+      <option>Size: M</option>
+      <option>Size: L</option>
+      <option>Size: XL</option>
+    </select>
 
-      <div class="card">
-        <h3>🌐 Website Design</h3>
-        <p>Modern and mobile-friendly websites for businesses.</p>
-        <div class="price">$30+</div>
-      </div>
+    <button onclick="addToCart('Casual Shirt',1999,'size2')">
+      Add to Cart
+    </button>
+  </div>
 
-      <div class="card">
-        <h3>📱 Mobile Website</h3>
-        <p>Websites that work smoothly on mobile phones.</p>
-        <div class="price">$30+</div>
-      </div>
 
-      <div class="card">
-        <h3>🎨 Landing Page</h3>
-        <p>Simple landing pages for products and services.</p>
-        <div class="price">$20+</div>
-      </div>
+  <div class="product">
+    <div class="photo">👖</div>
+    <h3>Classic Jeans</h3>
+    <p class="price">Rs. 2499</p>
 
-    </div>
-  </section>
+    <select id="size3">
+      <option>Size: 30</option>
+      <option>Size: 32</option>
+      <option>Size: 34</option>
+      <option>Size: 36</option>
+    </select>
 
-  <!-- Portfolio Sample -->
+    <button onclick="addToCart('Classic Jeans',2499,'size3')">
+      Add to Cart
+    </button>
+  </div>
 
-  <section>
-    <h2>Portfolio Sample</h2>
 
-    <div class="restaurant">
+  <div class="product">
+    <div class="photo">🧥</div>
+    <h3>Warm Hoodie</h3>
+    <p class="price">Rs. 2999</p>
 
-      <div class="restaurant-title">
-        <h3>Royal Taste Restaurant</h3>
-        <p>Fresh Food • Great Taste • Friendly Service</p>
-      </div>
+    <select id="size4">
+      <option>Size: M</option>
+      <option>Size: L</option>
+      <option>Size: XL</option>
+    </select>
 
-      <h2>Our Menu</h2>
+    <button onclick="addToCart('Warm Hoodie',2999,'size4')">
+      Add to Cart
+    </button>
+  </div>
 
-      <div class="menu">
+</div>
 
-        <div class="item">
-          <h3>Chicken Burger</h3>
-          <p>Fresh chicken burger</p>
-          <div class="price">£7.99</div>
-        </div>
 
-        <div class="item">
-          <h3>Pizza</h3>
-          <p>Freshly baked pizza</p>
-          <div class="price">£10.99</div>
-        </div>
+<div class="cart">
 
-        <div class="item">
-          <h3>Chicken Biryani</h3>
-          <p>Traditional spicy biryani</p>
-          <div class="price">£8.99</div>
-        </div>
+  <h2>🛒 My Cart</h2>
 
-        <div class="item">
-          <h3>Fresh Drink</h3>
-          <p>Cold refreshing drink</p>
-          <div class="price">£2.99</div>
-        </div>
+  <div id="cartItems">
+    Cart is empty
+  </div>
 
-      </div>
+  <h3>
+    Products Total: Rs. <span id="total">0</span>
+  </h3>
 
-      <div class="item" style="margin-top:20px;">
-        <h3>Opening Hours</h3>
-        <p>Monday - Sunday</p>
-        <p>11:00 AM - 11:00 PM</p>
-      </div>
+  <p>
+    Delivery Charges: Rs. <span id="delivery">200</span>
+  </p>
 
-    </div>
-  </section>
+  <h3 class="final-total">
+    Final Total: Rs. <span id="finalTotal">0</span>
+  </h3>
 
-  <!-- About -->
+  <hr>
 
-  <section>
-    <h2>About Me</h2>
+  <h3>📦 Delivery Information</h3>
 
-    <div class="card">
-      <p>
-        Hello! I am Mujahid. I create simple websites
-        for businesses and individuals. My goal is to
-        provide clean and affordable web solutions.
-      </p>
-    </div>
-  </section>
+  <select id="paymentMethod">
+    <option value="Cash on Delivery">
+      Cash on Delivery
+    </option>
+  </select>
 
-  <!-- Contact -->
+  <input
+    id="customerName"
+    type="text"
+    placeholder="Your Name">
 
-  <section id="contact" class="contact">
+  <input
+    id="customerPhone"
+    type="tel"
+    placeholder="Phone Number">
 
-    <h2>Contact Me</h2>
+  <input
+    id="customerCity"
+    type="text"
+    placeholder="City">
 
-    <p>Interested in a website? Send me a message.</p>
+  <textarea
+    id="customerAddress"
+    placeholder="Complete Address"></textarea>
 
-    <a class="btn" href="https://wa.me/923094816619">
-      WhatsApp Me
-    </a>
+  <button class="green" onclick="orderOnWhatsApp()">
+    📱 Place Order on WhatsApp
+  </button>
 
-  </section>
+</div>
 
-  <footer>
-    © 2026 Mujahid Web Studio
-  </footer>
+
+<footer>
+  <p>© 2026 Mujahid Online Store</p>
+  <p>Fashion for Everyone</p>
+</footer>
+
+
+<script>
+
+let cart = [];
+
+let deliveryCharges = 200;
+
+
+function addToCart(name,price,sizeId){
+
+  let size =
+    document.getElementById(sizeId).value;
+
+  cart.push({
+    name:name,
+    price:price,
+    size:size
+  });
+
+  showCart();
+
+  alert(name + " added to cart!");
+}
+
+
+function showCart(){
+
+  let html = "";
+  let total = 0;
+
+  cart.forEach(function(item,index){
+
+    html +=
+      '<div class="cart-item">' +
+
+      '<b>' + item.name + '</b><br>' +
+
+      item.size +
+      ' - Rs. ' +
+      item.price +
+
+      '<br>' +
+
+      '<button onclick="removeItem(' +
+      index +
+      ')">Remove</button>' +
+
+      '</div>';
+
+    total += item.price;
+
+  });
+
+
+  if(cart.length === 0){
+
+    html = "Cart is empty";
+
+    document.getElementById("total").innerText = "0";
+
+    document.getElementById("finalTotal").innerText = "0";
+
+  }else{
+
+    document.getElementById("total").innerText =
+      total;
+
+    document.getElementById("finalTotal").innerText =
+      total + deliveryCharges;
+  }
+
+
+  document.getElementById("cartItems").innerHTML =
+    html;
+}
+
+
+function removeItem(index){
+
+  cart.splice(index,1);
+
+  showCart();
+}
+
+
+function searchProducts(){
+
+  let search =
+    document.getElementById("search")
+    .value.toLowerCase();
+
+  let products =
+    document.querySelectorAll(".product");
+
+
+  products.forEach(function(product){
+
+    let name =
+      product.innerText.toLowerCase();
+
+    if(name.includes(search)){
+
+      product.style.display = "";
+
+    }else{
+
+      product.style.display = "none";
+
+    }
+
+  });
+
+}
+
+
+function orderOnWhatsApp(){
+
+  if(cart.length === 0){
+
+    alert("Please add a product first.");
+
+    return;
+  }
+
+
+  let name =
+    document.getElementById("customerName").value.trim();
+
+  let phone =
+    document.getElementById("customerPhone").value.trim();
+
+  let city =
+    document.getElementById("customerCity").value.trim();
+
+  let address =
+    document.getElementById("customerAddress").value.trim();
+
+  let payment =
+    document.getElementById("paymentMethod").value;
+
+
+  if(!name || !phone || !city || !address){
+
+    alert("Please fill all customer details.");
+
+    return;
+  }
+
+
+  let products = "";
+  let total = 0;
+
+
+  cart.forEach(function(item){
+
+    products +=
+      item.name +
+      " | " +
+      item.size +
+      " | Rs. " +
+      item.price +
+      "\n";
+
+    total += item.price;
+
+  });
+
+
+  let finalTotal =
+    total + deliveryCharges;
+
+
+  let message =
+    "NEW ORDER\n\n" +
+
+    "Products:\n" +
+    products +
+
+    "\nProducts Total: Rs. " +
+    total +
+
+    "\nDelivery Charges: Rs. " +
+    deliveryCharges +
+
+    "\nFinal Total: Rs. " +
+    finalTotal +
+
+    "\n\nPayment: " +
+    payment +
+
+    "\n\nCustomer Name: " +
+    name +
+
+    "\nPhone: " +
+    phone +
+
+    "\nCity: " +
+    city +
+
+    "\nAddress: " +
+    address;
+
+
+  /*
+    APNA WHATSAPP NUMBER YAHAN LIKHEN
+
+    Example:
+    923094816619
+
+    03 se start na karein.
+    + sign bhi na lagayen.
+  */
+
+  let whatsappNumber =
+    "923001234567";
+
+
+  let whatsappURL =
+    "https://wa.me/" +
+    whatsappNumber +
+    "?text=" +
+    encodeURIComponent(message);
+
+
+  window.open(
+    whatsappURL,
+    "_blank"
+  );
+
+}
+
+</script>
 
 </body>
 </html>
